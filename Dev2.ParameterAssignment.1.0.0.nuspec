@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Dev2.ParameterAssignment</id>
+        <version>1.0.0</version>
+        <title>Parameter Assignment Warnings</title>
+        <authors>Ashley Lewis</authors>
+        <owners>DEV2</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Resharper plugin for warning about assigning to a parameter variable.</description>
+        <dependencies>
+            <dependency id="Wave" version="[1.0]" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="ParameterAssignment\bin\Debug\ParameterAssignment.dll" target="DotFiles\ParameterAssignment.dll" />
+        <file src="ParameterAssignment\bin\Debug\ParameterAssignment.pdb" target="DotFiles\ParameterAssignment.pdb" />
+    </files>
+</package>
