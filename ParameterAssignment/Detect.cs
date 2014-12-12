@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JetBrains.Application.Progress;
+using JetBrains.Annotations;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.CSharp.Daemon;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Feature.Services.LinqTools;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
-using JetBrains.ReSharper.Psi.CSharp.Impl;
-using JetBrains.ReSharper.Psi.CSharp.Resolve;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Files;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.Util;
 
 namespace ParameterAssignment
 {
-    internal class Detect : IDaemonStageProcess
+    [UsedImplicitly]
+    public class Detect : IDaemonStageProcess
     {
-        public IDaemonProcess DaemonProcess { get; set; }
+        public IDaemonProcess DaemonProcess { get; private set; }
 
         public Detect(IDaemonProcess process)
         {
@@ -76,10 +71,10 @@ namespace ParameterAssignment
         }
     }
 
-    [StaticSeverityHighlighting(Severity.SUGGESTION, "Unsafe Assignment")]
+    [StaticSeverityHighlighting(Severity.WARNING, "Unsafe Assignment")]
     public class MakeParameterAssignmentSuggestion : CSharpHighlightingBase, IHighlighting
     {
-        public IAssignmentExpression AssignmentExpression { get; private set; }
+        private IAssignmentExpression AssignmentExpression { get; set; }
         public MakeParameterAssignmentSuggestion(IAssignmentExpression memberAssignmentExpression)
         {
             AssignmentExpression = memberAssignmentExpression;
