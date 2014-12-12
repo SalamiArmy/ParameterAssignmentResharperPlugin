@@ -21,7 +21,6 @@ namespace ParameterAssignment
         public string ErrorStripeToolTip
         {
             get { return ToolTip; }
-
         }
 
         public override bool IsValid()
