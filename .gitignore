@@ -1,0 +1,5 @@
+/Packages
+/ParameterAssignment/bin
+/ParameterAssignment/obj
+*.user
+*.suo
