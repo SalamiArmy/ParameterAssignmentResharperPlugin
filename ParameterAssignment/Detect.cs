@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using JetBrains.DocumentModel;
-using JetBrains.ReSharper.Feature.Services.CSharp.Daemon;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Feature.Services.LinqTools;
 using JetBrains.ReSharper.Psi;
@@ -58,7 +57,7 @@ namespace ParameterAssignment
                         //Assign to parameter variable detected!
                         var docRange = assignment.GetDocumentRange();
 
-                        highlights.Add(new HighlightingInfo(docRange, new MakeParameterAssignmentSuggestion(assignment)));
+                        highlights.Add(new HighlightingInfo(docRange, new MakeParameterAssignmentWarning(assignment)));
                     });
 
                     method.ProcessDescendants(assignmentsProcessor);
@@ -68,37 +67,6 @@ namespace ParameterAssignment
 
                 committer(new DaemonStageResult(highlights));
             }
-        }
-    }
-
-    [StaticSeverityHighlighting(Severity.WARNING, "Unsafe Assignment")]
-    public class MakeParameterAssignmentSuggestion : CSharpHighlightingBase, IHighlighting
-    {
-        private IAssignmentExpression AssignmentExpression { get; set; }
-        public MakeParameterAssignmentSuggestion(IAssignmentExpression memberAssignmentExpression)
-        {
-            AssignmentExpression = memberAssignmentExpression;
-        }
-
-        public string ToolTip
-        {
-            get { return "Parameter variable should not be assigned to."; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return ToolTip; }
-
-        }
-
-        public override bool IsValid()
-        {
-            return AssignmentExpression.IsValid();
-        }
-
-        public int NavigationOffsetPatch
-        {
-            get { return 0; }
         }
     }
 }
