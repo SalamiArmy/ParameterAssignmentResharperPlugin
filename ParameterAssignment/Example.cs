@@ -1,20 +1,20 @@
-﻿using JetBrains.UI.ExceptionReport.ExceptionAnalyzer.v4;
-using JetBrains.UI.Wpf;
-
-namespace ParameterAssignment
+﻿namespace ParameterAssignment
 {
     class Example
     {
-        public int MyFunction(int val)
+        public int ViolationExample(int val)
         {
             if(val > 5)
                 val = 5;
             return val;
         }
 
-        public ActionResult About()
+        public int AcceptableExample(int val)
         {
-            return View();
+            var updatedVal = val;
+            if (val > 5)
+                updatedVal = 5;
+            return updatedVal;
         }
     }
 }
